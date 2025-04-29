@@ -26,3 +26,19 @@ def new_filmes(request):
             'mensagem': 'Novo Filme'
         }
         return render(request, template_name, context)
+
+def update_filmes(request, pk):
+    filme = Filmes.objects.get(pk = pk)
+    if request.method == 'POST':
+        form = FilmesForm(request.POST, instance = filme)
+        if form.is_valid():
+            form.save()
+            return redirect('list_filmes')
+    else:
+        template_name = 'update_filmes.html'
+        context = {
+            'form': FilmesForm(instance = filme),
+            'pk' : pk
+        }
+        return render(request, template_name, context)
+

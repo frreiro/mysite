@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <form action="{% url 'update_filmes' pk %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Enviar">
+    </form>
+    <a href="{% url 'index' %}">Voltar</a>
+{% endblock %}
